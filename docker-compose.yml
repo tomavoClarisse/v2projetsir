@@ -1,0 +1,24 @@
+version : "3"
+services:
+  app:
+    container_name: groupe3
+    image: groupe3
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8083:8083"
+    depends_on:
+      - dbpostgresql
+  dbpostgresql:
+    container_name: groupe3-db
+    image: postgres:9.6
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: projetsir
+    volumes:
+      - ./db-data:/var/lib/postgresql/data
+
